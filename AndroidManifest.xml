@@ -23,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="info.blakehawkins.timetabler.DisplayMessageActivity"
-            android:label="@string/title_activity_display_message"
+            android:name="info.blakehawkins.timetabler.SelectCourses"
+            android:label="@string/title_activity_select_courses" 
             android:parentActivityName="info.blakehawkins.timetabler.MainViewer" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

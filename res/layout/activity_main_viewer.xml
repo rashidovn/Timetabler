@@ -12,12 +12,11 @@
 
     <TextView
         android:id="@+id/semMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="          Semester 1"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@style/AppTheme" />
-
+        android:gravity="center_horizontal"
+        android:text="Semester 1" />
+    
     <TextView
         android:id="@+id/monday"
         android:layout_width="wrap_content"
@@ -34,15 +33,17 @@
         android:id="@+id/course1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="     10:00-10:50 Algorithms and Data Structures"
-        android:textColor="@string/blue_color" />
-
+        android:paddingLeft="5dp"
+        android:text="10:00-10:50 Algorithms and Data Structures"
+        android:textColor="#0000FF" />
+    
     <TextView
         android:id="@+id/course2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="     16:10-17:00 Software Engineering With Objects and Components"
-        android:textColor="@string/blue_color" />
+        android:paddingLeft="5dp"
+        android:text="16:10-17:00 Software Engineering With Objects and Components"
+        android:textColor="#0000FF" />
 
     <TextView
         android:id="@+id/wednesday"
@@ -54,8 +55,9 @@
         android:id="@+id/course3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="     12:10-13:00 Software Engineering Large Practical"
-        android:textColor="@string/blue_color" />
+        android:paddingLeft="5dp"
+        android:text="12:10-13:00 Software Engineering Large Practical"
+        android:textColor="#0000FF" />
 
     <TextView
         android:id="@+id/thursday"
@@ -73,14 +75,16 @@
         android:id="@+id/course4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="     10:00-10:50 Algorithms and Data Structures"
-        android:textColor="@string/blue_color" />
+        android:paddingLeft="5dp"
+        android:text="10:00-10:50 Algorithms and Data Structures"
+        android:textColor="#0000FF" />
 
     <TextView
         android:id="@+id/course5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="     16:10-17:00 Software Engineering With Objects and Components"
-        android:textColor="@string/blue_color" />
-
+        android:paddingLeft="5dp"
+        android:text="16:10-17:00 Software Engineering With Objects and Components"
+        android:textColor="#0000FF" />
+     -->
 </LinearLayout><!-- </RelativeLayout> -->
