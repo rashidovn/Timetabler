@@ -1,27 +1,28 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:timetabler="http://schemas.android.com/apk/res-auto" >
    
     <item
         android:id="@+id/action_selCourses"
         android:orderInCategory="1"
-        android:showAsAction="never"
+        timetabler:showAsAction="never"
         android:title="@string/action_selCourses" />
     
     <item
         android:id="@+id/action_refreshXML"
         android:orderInCategory="2"
-        android:showAsAction="never"
+        timetabler:showAsAction="never"
         android:title="@string/action_refreshXML" />
     
     <item
         android:id="@+id/action_swapSem"
         android:orderInCategory="3"
-        android:showAsAction="never"
+        timetabler:showAsAction="never"
         android:title="@string/action_swapSem" />
     
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        timetabler:showAsAction="never"
         android:title="@string/action_settings" />
 
 </menu>
