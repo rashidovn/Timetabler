@@ -3,14 +3,18 @@ package info.blakehawkins.timetabler;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainViewer extends ActionBarActivity {
+	private static final String CLASS_NAME = "MainViewer";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_viewer);
+		Log.v(CLASS_NAME, "Activity Created");
 	}
 
 	@Override
@@ -19,10 +23,10 @@ public class MainViewer extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.main_viewer, menu);
 		return true;
 	}
-	
+
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item){
-		switch(item.getItemId()){
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
 		case R.id.action_selCourses:
 			selectCourses();
 			return true;
@@ -30,19 +34,15 @@ public class MainViewer extends ActionBarActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
-	public void selectCourses(){
-		Intent intent = new Intent(this,SelectCourses.class);
+
+	public void selectCourses() {
+		Intent intent = new Intent(this, SelectCourses.class);
 		startActivity(intent);
 	}
 
-	// ** Called when the send button is pressed */
-//	public void sendMessage(View view) {
-//		Intent intent = new Intent(this, DisplayMessageActivity.class);
-//		EditText editText = (EditText) findViewById(R.id.edit_message);
-//		String message = editText.getText().toString();
-//		intent.putExtra(EXTRA_MESSAGE, message);
-//		startActivity(intent);
-//	}
-
+	public void onStart() {
+		super.onStart();
+		Log.v(CLASS_NAME,"onStart() occured.");
+		XMLManager.verifyXMLIntegrity(this);
+	}
 }

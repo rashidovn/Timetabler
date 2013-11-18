@@ -1171,6 +1171,7 @@ containing a value of this type.
         public static final int hello_world=0x7f0a0015;
         public static final int title_activity_display_message=0x7f0a0014;
         public static final int title_activity_select_courses=0x7f0a0017;
+        public static final int toast_xml_copied_text=0x7f0a0018;
     }
     public static final class style {
         /** 

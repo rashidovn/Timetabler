@@ -12,5 +12,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="blue_color">#0000FF</string>
     <string name="title_activity_select_courses">Select Courses</string>
+    <string name="toast_xml_copied_text">XML Data copied from static assets successfully.</string>
 
 </resources>
