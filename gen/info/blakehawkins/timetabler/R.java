@@ -1165,13 +1165,12 @@ containing a value of this type.
         public static final int action_settings=0x7f0a0011;
         public static final int action_swapSem=0x7f0a0010;
         public static final int app_name=0x7f0a000d;
-        public static final int blue_color=0x7f0a0016;
+        public static final int blue_color=0x7f0a0015;
         public static final int button_send=0x7f0a0013;
         public static final int edit_message=0x7f0a0012;
-        public static final int hello_world=0x7f0a0015;
         public static final int title_activity_display_message=0x7f0a0014;
-        public static final int title_activity_select_courses=0x7f0a0017;
-        public static final int toast_xml_copied_text=0x7f0a0018;
+        public static final int title_activity_select_courses=0x7f0a0016;
+        public static final int toast_xml_copied_text=0x7f0a0017;
     }
     public static final class style {
         /** 
