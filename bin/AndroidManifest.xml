@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light" >
         <activity
-            android:name="info.blakehawkins.timetabler.MainViewer"
+            android:name="info.blakehawkins.timetabler.ActivityMainViewer"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +23,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="info.blakehawkins.timetabler.SelectCourses"
+            android:name="info.blakehawkins.timetabler.ActivitySelectCourses"
             android:label="@string/title_activity_select_courses" 
-            android:parentActivityName="info.blakehawkins.timetabler.MainViewer" >
+            android:parentActivityName="info.blakehawkins.timetabler.ActivityMainViewer" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="info.blakehawkins.timetabler.MainViewer" />
