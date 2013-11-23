@@ -9,6 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ActivityMainViewer" >
 
+    <!--
     <TextView
         android:id="@+id/semMessage"
         android:layout_width="fill_parent"
@@ -85,4 +86,7 @@
         android:paddingLeft="5dp"
         android:text="16:10-17:00 Software Engineering With Objects and Components"
         android:textColor="#0000FF" />
-</LinearLayout>
+        -->
+        
+        </LinearLayout>
+    
