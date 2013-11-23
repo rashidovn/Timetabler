@@ -9,9 +9,18 @@
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
     <string name="title_activity_display_message">My Message</string>
-    <string name="blue_color">#0000FF</string>
+    <string name="title_activity_filter_courses">Filter Courses</string>
     <string name="title_activity_select_courses">Select Courses</string>
     <string name="toast_xml_copied_text">XML Data copied from static assets successfully.</string>
     <string name="preference_file_key">info.blakehawkins.timetabler.preferencesKey</string>
-
-</resources>
+    <string name="action_filter_courses">Filter Courses</string>
+    <string name="display_years">Display Years</string>
+    <string name="year1">Year 1</string>
+    <string name="year2">Year 2</string>
+    <string name="year3">Year 3</string>
+    <string name="year4">Year 4</string>
+    <string name="year5">Year 5</string>
+    <string name="display_semesters">Display Semesters</string>
+    <string name="semester1">Semester 1</string>
+    <string name="semester2">Semester 2</string>
+</resources>
