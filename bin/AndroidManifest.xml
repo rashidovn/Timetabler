@@ -22,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="info.blakehawkins.timetabler.ActivitySelectCourses"
             android:label="@string/title_activity_select_courses"
@@ -31,7 +30,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="info.blakehawkins.timetabler.ActivityMainViewer" />
         </activity>
-        
         <activity
             android:name="info.blakehawkins.timetabler.ActivityFilterCourses"
             android:label="@string/title_activity_filter_courses"
@@ -39,6 +37,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="info.blakehawkins.timetabler.ActivitySelectCourses" />
+        </activity>
+        <activity
+            android:name="info.blakehawkins.timetabler.ActivitySettings"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="info.blakehawkins.timetabler.ActivityMainViewer" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="info.blakehawkins.timetabler.ActivityMainViewer" />
         </activity>
     </application>
 
