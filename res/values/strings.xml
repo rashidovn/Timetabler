@@ -2,13 +2,11 @@
 <resources>
 
     <string name="app_name">Timetabler</string>
+    <string name="pref_about_summary">Timetabler 0.2.1 by Blake Hawkins (s1143704)</string>
     <string name="action_selCourses">Select Courses</string>
     <string name="action_refreshXML">Refresh XML</string>
     <string name="action_swapSem">Swap Semester</string>
     <string name="action_settings">Settings</string>
-    <string name="edit_message">Enter a message</string>
-    <string name="button_send">Send</string>
-    <string name="title_activity_display_message">My Message</string>
     <string name="title_activity_filter_courses">Filter Courses</string>
     <string name="title_activity_select_courses">Select Courses</string>
     <string name="title_activity_settings">Settings</string>
@@ -31,5 +29,6 @@
     <string name="pref_resetXmlUri_summary">Sets the XML Fetch URI to the default static address</string>
     <string name="pref_autoSemester_title">Automatically Switch Semester</string>
     <string name="pref_autoSemester_summary">Timetabler will change the displayed semester automatically</string>
-
+    <string name="pref_about_title">About Timetabler</string>
+    <string name="loading_content">Content Loading&#8230;</string>
 </resources>
