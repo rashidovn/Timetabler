@@ -32,5 +32,11 @@
     <string name="pref_about_title">About Timetabler</string>
     <string name="loading_content">Content Loading&#8230;</string>
     <string name="title_activity_course_details">Course Details</string>
+    <string name="view_map">View Map</string>
+    <string name="course_webpage">Course Webpage</string>
+    <string name="room">Room:</string>
+    <string name="drps">Open in DRPS</string>
+    <string name="TIME_TAG_ID">1</string>
+    <string name="COURSE_TAG_ID">2</string>
 
 </resources>

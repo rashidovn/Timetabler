@@ -1120,6 +1120,8 @@ containing a value of this type.
         public static final int select_courses=0x7f0d0002;
     }
     public static final class string {
+        public static final int COURSE_TAG_ID=0x7f0b0031;
+        public static final int TIME_TAG_ID=0x7f0b0030;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f0b0001;
@@ -1166,8 +1168,10 @@ containing a value of this type.
         public static final int action_settings=0x7f0b0012;
         public static final int action_swapSem=0x7f0b0011;
         public static final int app_name=0x7f0b000d;
+        public static final int course_webpage=0x7f0b002d;
         public static final int display_semesters=0x7f0b001f;
         public static final int display_years=0x7f0b0019;
+        public static final int drps=0x7f0b002f;
         public static final int loading_content=0x7f0b002a;
         public static final int pref_about_summary=0x7f0b000e;
         public static final int pref_about_title=0x7f0b0029;
@@ -1179,6 +1183,7 @@ containing a value of this type.
         public static final int pref_xmlUri_summary=0x7f0b0023;
         public static final int pref_xmlUri_title=0x7f0b0022;
         public static final int preference_file_key=0x7f0b0017;
+        public static final int room=0x7f0b002e;
         public static final int semester1=0x7f0b0020;
         public static final int semester2=0x7f0b0021;
         public static final int title_activity_course_details=0x7f0b002b;
@@ -1186,6 +1191,7 @@ containing a value of this type.
         public static final int title_activity_select_courses=0x7f0b0014;
         public static final int title_activity_settings=0x7f0b0015;
         public static final int toast_xml_copied_text=0x7f0b0016;
+        public static final int view_map=0x7f0b002c;
         public static final int year1=0x7f0b001a;
         public static final int year2=0x7f0b001b;
         public static final int year3=0x7f0b001c;
