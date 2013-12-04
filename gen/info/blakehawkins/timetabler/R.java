@@ -980,7 +980,8 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int ic_launcher=0x7f020057;
+        public static final int ic_action_search=0x7f020057;
+        public static final int ic_launcher=0x7f020058;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;
@@ -991,14 +992,14 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f060023;
         public static final int action_bar_title=0x7f060022;
         public static final int action_context_bar=0x7f06001d;
-        public static final int action_filter_courses=0x7f06004a;
+        public static final int action_filter_courses=0x7f06004b;
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_refreshXML=0x7f060048;
-        public static final int action_selCourses=0x7f060047;
+        public static final int action_refreshXML=0x7f060049;
+        public static final int action_selCourses=0x7f060048;
         public static final int action_settings=0x7f060046;
-        public static final int action_swapSem=0x7f060049;
+        public static final int action_swapSem=0x7f06004a;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
@@ -1029,6 +1030,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
         public static final int radio=0x7f06002f;
+        public static final int search=0x7f060047;
         public static final int search_badge=0x7f060032;
         public static final int search_bar=0x7f060031;
         public static final int search_button=0x7f060033;
@@ -1111,17 +1113,19 @@ containing a value of this type.
         public static final int activity_course_details=0x7f030017;
         public static final int activity_filter_courses=0x7f030018;
         public static final int activity_main_viewer=0x7f030019;
-        public static final int activity_select_courses=0x7f03001a;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
+        public static final int activity_search_results=0x7f03001a;
+        public static final int activity_select_courses=0x7f03001b;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
     }
     public static final class menu {
         public static final int activity_course_details=0x7f0d0000;
-        public static final int main_viewer=0x7f0d0001;
-        public static final int select_courses=0x7f0d0002;
+        public static final int activity_main_viewer=0x7f0d0001;
+        public static final int activity_search_results=0x7f0d0002;
+        public static final int select_courses=0x7f0d0003;
     }
     public static final class string {
-        public static final int COURSE_TAG_ID=0x7f0b0031;
-        public static final int TIME_TAG_ID=0x7f0b0030;
+        public static final int COURSE_TAG_ID=0x7f0b0035;
+        public static final int TIME_TAG_ID=0x7f0b0034;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f0b0001;
@@ -1162,41 +1166,45 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0b000b;
-        public static final int action_filter_courses=0x7f0b0018;
+        public static final int action_filter_courses=0x7f0b0019;
         public static final int action_refreshXML=0x7f0b0010;
         public static final int action_selCourses=0x7f0b000f;
         public static final int action_settings=0x7f0b0012;
         public static final int action_swapSem=0x7f0b0011;
         public static final int app_name=0x7f0b000d;
-        public static final int course_webpage=0x7f0b002d;
-        public static final int display_semesters=0x7f0b001f;
-        public static final int display_years=0x7f0b0019;
-        public static final int drps=0x7f0b002f;
-        public static final int loading_content=0x7f0b002a;
+        public static final int course_webpage=0x7f0b002e;
+        public static final int display_semesters=0x7f0b0020;
+        public static final int display_years=0x7f0b001a;
+        public static final int drps=0x7f0b0030;
+        public static final int loading_content=0x7f0b002b;
         public static final int pref_about_summary=0x7f0b000e;
-        public static final int pref_about_title=0x7f0b0029;
-        public static final int pref_autoSemester_summary=0x7f0b0028;
-        public static final int pref_autoSemester_title=0x7f0b0027;
-        public static final int pref_resetXmlUri_summary=0x7f0b0026;
-        public static final int pref_resetXmlUri_title=0x7f0b0025;
-        public static final int pref_xmlUri_default=0x7f0b0024;
-        public static final int pref_xmlUri_summary=0x7f0b0023;
-        public static final int pref_xmlUri_title=0x7f0b0022;
-        public static final int preference_file_key=0x7f0b0017;
-        public static final int room=0x7f0b002e;
-        public static final int semester1=0x7f0b0020;
-        public static final int semester2=0x7f0b0021;
-        public static final int title_activity_course_details=0x7f0b002b;
+        public static final int pref_about_title=0x7f0b002a;
+        public static final int pref_autoSemester_summary=0x7f0b0029;
+        public static final int pref_autoSemester_title=0x7f0b0028;
+        public static final int pref_resetXmlUri_summary=0x7f0b0027;
+        public static final int pref_resetXmlUri_title=0x7f0b0026;
+        public static final int pref_xmlUri_default=0x7f0b0025;
+        public static final int pref_xmlUri_summary=0x7f0b0024;
+        public static final int pref_xmlUri_title=0x7f0b0023;
+        public static final int preference_file_key=0x7f0b0018;
+        public static final int room=0x7f0b002f;
+        public static final int search_hint=0x7f0b0032;
+        public static final int search_title=0x7f0b0031;
+        public static final int semester1=0x7f0b0021;
+        public static final int semester2=0x7f0b0022;
+        public static final int show_in_timetabler=0x7f0b0033;
+        public static final int title_activity_course_details=0x7f0b002c;
         public static final int title_activity_filter_courses=0x7f0b0013;
+        public static final int title_activity_search_results=0x7f0b0016;
         public static final int title_activity_select_courses=0x7f0b0014;
         public static final int title_activity_settings=0x7f0b0015;
-        public static final int toast_xml_copied_text=0x7f0b0016;
-        public static final int view_map=0x7f0b002c;
-        public static final int year1=0x7f0b001a;
-        public static final int year2=0x7f0b001b;
-        public static final int year3=0x7f0b001c;
-        public static final int year4=0x7f0b001d;
-        public static final int year5=0x7f0b001e;
+        public static final int toast_xml_copied_text=0x7f0b0017;
+        public static final int view_map=0x7f0b002d;
+        public static final int year1=0x7f0b001b;
+        public static final int year2=0x7f0b001c;
+        public static final int year3=0x7f0b001d;
+        public static final int year4=0x7f0b001e;
+        public static final int year5=0x7f0b001f;
     }
     public static final class style {
         /** 
@@ -1415,6 +1423,7 @@ containing a value of this type.
     }
     public static final class xml {
         public static final int preferences=0x7f050000;
+        public static final int searchable=0x7f050001;
     }
     public static final class styleable {
         /**  ============================================ 

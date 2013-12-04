@@ -10,6 +10,7 @@
     <string name="title_activity_filter_courses">Filter Courses</string>
     <string name="title_activity_select_courses">Select Courses</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_search_results">Search Results</string>
     <string name="toast_xml_copied_text">XML Data copied from static assets successfully.</string>
     <string name="preference_file_key">info.blakehawkins.timetabler.preferencesKey</string>
     <string name="action_filter_courses">Filter Courses</string>
@@ -36,7 +37,9 @@
     <string name="course_webpage">Course Webpage</string>
     <string name="room">Room:</string>
     <string name="drps">Open in DRPS</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Course Name</string>
+    <string name="show_in_timetabler">Show Course in Timetabler</string>
     <string name="TIME_TAG_ID">1</string>
     <string name="COURSE_TAG_ID">2</string>
-
 </resources>
