@@ -31,4 +31,6 @@
     <string name="pref_autoSemester_summary">Timetabler will change the displayed semester automatically</string>
     <string name="pref_about_title">About Timetabler</string>
     <string name="loading_content">Content Loading&#8230;</string>
+    <string name="title_activity_course_details">Course Details</string>
+
 </resources>

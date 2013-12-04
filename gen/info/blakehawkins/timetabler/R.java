@@ -995,10 +995,10 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_refreshXML=0x7f060047;
-        public static final int action_selCourses=0x7f060046;
-        public static final int action_settings=0x7f060049;
-        public static final int action_swapSem=0x7f060048;
+        public static final int action_refreshXML=0x7f060048;
+        public static final int action_selCourses=0x7f060047;
+        public static final int action_settings=0x7f060046;
+        public static final int action_swapSem=0x7f060049;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
@@ -1108,14 +1108,16 @@ containing a value of this type.
         public static final int abc_popup_menu_item_layout=0x7f030014;
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
-        public static final int activity_filter_courses=0x7f030017;
-        public static final int activity_main_viewer=0x7f030018;
-        public static final int activity_select_courses=0x7f030019;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001a;
+        public static final int activity_course_details=0x7f030017;
+        public static final int activity_filter_courses=0x7f030018;
+        public static final int activity_main_viewer=0x7f030019;
+        public static final int activity_select_courses=0x7f03001a;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
     }
     public static final class menu {
-        public static final int main_viewer=0x7f0d0000;
-        public static final int select_courses=0x7f0d0001;
+        public static final int activity_course_details=0x7f0d0000;
+        public static final int main_viewer=0x7f0d0001;
+        public static final int select_courses=0x7f0d0002;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1179,6 +1181,7 @@ containing a value of this type.
         public static final int preference_file_key=0x7f0b0017;
         public static final int semester1=0x7f0b0020;
         public static final int semester2=0x7f0b0021;
+        public static final int title_activity_course_details=0x7f0b002b;
         public static final int title_activity_filter_courses=0x7f0b0013;
         public static final int title_activity_select_courses=0x7f0b0014;
         public static final int title_activity_settings=0x7f0b0015;
