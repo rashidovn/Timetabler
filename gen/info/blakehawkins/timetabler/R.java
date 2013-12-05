@@ -1124,8 +1124,8 @@ containing a value of this type.
         public static final int select_courses=0x7f0d0003;
     }
     public static final class string {
-        public static final int COURSE_TAG_ID=0x7f0b0035;
-        public static final int TIME_TAG_ID=0x7f0b0034;
+        public static final int COURSE_TAG_ID=0x7f0b0044;
+        public static final int TIME_TAG_ID=0x7f0b0043;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f0b0001;
@@ -1171,11 +1171,19 @@ containing a value of this type.
         public static final int action_selCourses=0x7f0b000f;
         public static final int action_settings=0x7f0b0012;
         public static final int action_swapSem=0x7f0b0011;
+        public static final int ai=0x7f0b0036;
+        public static final int apdep=0x7f0b0035;
         public static final int app_name=0x7f0b000d;
+        public static final int applicable_years=0x7f0b0042;
+        public static final int cg=0x7f0b0037;
+        public static final int course_level=0x7f0b003a;
         public static final int course_webpage=0x7f0b002e;
+        public static final int cs=0x7f0b0038;
         public static final int display_semesters=0x7f0b0020;
         public static final int display_years=0x7f0b001a;
         public static final int drps=0x7f0b0030;
+        public static final int euclid=0x7f0b0034;
+        public static final int lec=0x7f0b003c;
         public static final int loading_content=0x7f0b002b;
         public static final int pref_about_summary=0x7f0b000e;
         public static final int pref_about_title=0x7f0b002a;
@@ -1187,7 +1195,9 @@ containing a value of this type.
         public static final int pref_xmlUri_summary=0x7f0b0024;
         public static final int pref_xmlUri_title=0x7f0b0023;
         public static final int preference_file_key=0x7f0b0018;
+        public static final int pts=0x7f0b003b;
         public static final int room=0x7f0b002f;
+        public static final int se=0x7f0b0039;
         public static final int search_hint=0x7f0b0032;
         public static final int search_title=0x7f0b0031;
         public static final int semester1=0x7f0b0021;
@@ -1205,6 +1215,11 @@ containing a value of this type.
         public static final int year3=0x7f0b001d;
         public static final int year4=0x7f0b001e;
         public static final int year5=0x7f0b001f;
+        public static final int yr1=0x7f0b003d;
+        public static final int yr2=0x7f0b003e;
+        public static final int yr3=0x7f0b003f;
+        public static final int yr4=0x7f0b0040;
+        public static final int yr5=0x7f0b0041;
     }
     public static final class style {
         /** 

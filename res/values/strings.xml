@@ -40,6 +40,21 @@
     <string name="search_title">Search</string>
     <string name="search_hint">Course Name</string>
     <string name="show_in_timetabler">Show Course in Timetabler</string>
+    <string name="euclid">EUCLID</string>
+    <string name="apdep">Applicable Departments</string>
+    <string name="ai">Artificial Intelligence</string>
+    <string name="cg">Cognitive Science</string>
+    <string name="cs">Computer Science</string>
+    <string name="se">Software Engineering</string>
+    <string name="course_level">Course Level</string>
+    <string name="pts">Points</string>
+    <string name="lec">Lecturer</string>
+    <string name="yr1">Year 1</string>
+    <string name="yr2">Year 2</string>
+    <string name="yr3">Year 3</string>
+    <string name="yr4">Year 4</string>
+    <string name="yr5">Year 5</string>
+    <string name="applicable_years">Applicable Years</string>
     <string name="TIME_TAG_ID">1</string>
     <string name="COURSE_TAG_ID">2</string>
 </resources>
