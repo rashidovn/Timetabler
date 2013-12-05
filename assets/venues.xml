@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<venues>
+   <building>
+      <name>7BSQ</name>
+      <description>7 Bristo Square</description>
+      <map>http://www.ed.ac.uk/maps/buildings/bristo-square</map>
+   </building>
+   <building>
+      <name>7GS</name>
+      <description>7 George Square, Psychology</description>
+      <map>http://www.ed.ac.uk/maps/buildings/psychology-building</map>
+   </building>
+   <building>
+      <name>24BP</name>
+      <description>24 Buccleuch Place</description>
+      <map>http://www.ed.ac.uk/maps/buildings/buccleuch-place</map>
+   </building>
+   <building>
+      <name>AT</name>
+      <description>Appleton Tower, George Square</description>
+      <map>http://www.ed.ac.uk/maps/buildings/appleton-tower</map>
+   </building>
+   <building>
+      <name>CMB</name>
+      <description>Chrystal Macmillan Building, George Square</description>
+      <map>http://www.ed.ac.uk/maps/buildings/chrystal-macmillan-building</map>
+   </building>
+   <building>
+      <name>DHT</name>
+      <description>David Hume Tower, George Square</description>
+      <map>http://www.ed.ac.uk/maps/buildings/david-hume-tower</map>
+   </building>
+   <building>
+      <name>DHT LT</name>
+      <description>David Hume Tower Lecture Theatres, George Square</description>
+      <map>http://www.ed.ac.uk/maps/buildings/david-hume-tower-lecture-theatres</map>
+   </building>
+   <building>
+      <name>DSB</name>
+      <description>Dugald Stewart Building, Charles Street, off George Square</description>
+      <map>http://www.ed.ac.uk/maps/buildings/dugald-stewart-building</map>
+   </building>
+   <building>
+      <name>FH</name>
+      <description>Forrest Hill</description>
+      <map>http://www.ed.ac.uk/maps?building=forrest-hill-building</map>
+   </building>
+   <building>
+      <name>MH</name>
+      <description>Minto House, Chambers Street</description>
+      <map>http://www.ed.ac.uk/maps/buildings/minto-house</map>
+   </building>
+   <building>
+      <name>MST</name>
+      <description>Medical School Teviot, beside McEwan Hall off George Square</description>
+      <map>http://www.ed.ac.uk/maps/buildings/medical-school</map>
+   </building>
+   <building>
+      <name>OC</name>
+      <description>Old College, South Bridge</description>
+      <map>http://www.ed.ac.uk/maps/buildings/old-college</map>
+   </building>
+   <building>
+      <name>OIB</name>
+      <description>Old Infirmary Building (High School Yards), Drummond St [note, this is the Geography building]</description>
+      <map>http://www.ed.ac.uk/maps/buildings/high-school-yards</map>
+   </building>
+   <building>
+      <name>RB</name>
+      <description>Robson Building, George Square [formerly Hugh Robson Building, HRB]</description>
+      <map>http://www.ed.ac.uk/maps/buildings/hugh-robson-building</map>
+   </building>
+   <building>
+      <name>WRB</name>
+      <description>William Robertson Building, George Square</description>
+      <map>http://www.ed.ac.uk/maps/buildings/wiliam-robertson-building</map>
+   </building>
+   <building>
+      <name>PL</name>
+      <description>Paterson's Land</description>
+      <map>http://www.ed.ac.uk/maps?building=patersons-land</map>
+   </building>
+   <building>
+      <name>1GS</name>
+      <description>1 George Square (Neuroscience)</description>
+      <map>http://www.ed.ac.uk/maps?building=1-george-square</map>
+   </building>
+   <building>
+      <name>AH</name>
+      <description>Adam House</description>
+      <map>http://www.ed.ac.uk/maps?building=adam-house</map>
+   </building>
+   <building>
+      <name>GOI</name>
+      <description>Geography (Old Infirmary)</description>
+      <map>http://www.ed.ac.uk/maps?building=institute-of-geography</map>
+   </building>
+   <room>
+      <name>G.08</name>
+      <description>Room G08</description>
+   </room>
+   <room>
+      <name>LT1</name>
+      <description>Lecture Theatre 1</description>
+   </room>
+   <room>
+      <name>LT2</name>
+      <description>Lecture Theatre 2</description>
+   </room>
+   <room>
+      <name>LT3</name>
+      <description>Lecture Theatre 3</description>
+   </room>
+   <room>
+      <name>LT4</name>
+      <description>Lecture Theatre 4</description>
+   </room>
+   <room>
+      <name>LT5</name>
+      <description>Lecture Theatre 5</description>
+   </room>
+   <room>
+      <name>FRN</name>
+      <description>Faculty Room North</description>
+   </room>
+   <room>
+      <name>FRS</name>
+      <description>Faculty Room South</description>
+   </room>
+   <room>
+      <name>LTA</name>
+      <description>Lecture Theatre A</description>
+   </room>
+   <room>
+      <name>LTB</name>
+      <description>Lecture Theatre B</description>
+   </room>
+   <room>
+      <name>LTC</name>
+      <description>Lecture Theatre C</description>
+   </room>
+   <room>
+      <name>HRB LT</name>
+      <description>H.R.B Lecture Theatre</description>
+   </room>
+   <room>
+      <name>Meadows LT</name>
+      <description>Meadows Lecture Theatre (G.07 Doorway 4)</description>
+   </room>
+   <room>
+      <name>Teviot LT</name>
+      <description>Teviot Lecture Theatre (Doorway 5)</description>
+   </room>
+   <room>
+      <name>2.02</name>
+      <description>Room 2.02</description>
+   </room>
+   <room>
+      <name>G200 SR2</name>
+      <description>G200 Seminar Room 2 (Doorway 2)</description>
+   </room>
+   <room>
+      <name>G200 SR3</name>
+      <description>G200 Seminar Room 3 (Doorway 3)</description>
+   </room>
+   <room>
+      <name>SSLT</name>
+      <description>Sydney Smith Lecture Theatre (Doorway 1)</description>
+   </room>
+   <room>
+      <name>G.16 SR</name>
+      <description>G.16 Seminar Room (Doorway 4)</description>
+   </room>
+   <room>
+      <name>SR1</name>
+      <description>Seminar Room 1</description>
+   </room>
+   <room>
+      <name>SR2</name>
+      <description>Seminar Room 2</description>
+   </room>
+   <room>
+      <name>SR3</name>
+      <description>Seminar Room 3</description>
+   </room>
+   <room>
+      <name>GFEH</name>
+      <description>Ground Floor Exam Hall</description>
+   </room>
+   <room>
+      <name>DHR</name>
+      <description>Room 3.11 David Hume Room</description>
+   </room>
+</venues>
