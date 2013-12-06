@@ -6,7 +6,7 @@ import android.widget.CheckBox;
 
 /**
  * This is the filter courses activity, which can be opened via the Select
- * Courses activity. Filter courses is a statically build layout with checkboxes
+ * Courses activity. Filter courses is a statically built layout with checkboxes
  * for the various semesters and years stored in the Course data. By selecting
  * these filters, the Select Courses activity will change its contents.
  **/

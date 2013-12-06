@@ -40,112 +40,178 @@ public class ActivityMainViewer extends ActionBarActivity implements
 			COURSE_INTENT_KEY = "info.blakehawkins.timetabler.course";
 
 	/**
+	 * Auxillary method for building the Table row that displays the semester;
+	 * called only once but refactored for readability.
+	 **/
+	@SuppressWarnings("deprecation")
+	private TableRow buildSemestRow(LayoutParams genericRowParams, int semester) {
+		// Build the Table Row:
+		TableRow rowForSemester = new TableRow(this);
+		rowForSemester.setLayoutParams(genericRowParams);
+		LayoutParams rowForSemesterParams = new LayoutParams(
+				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams semesterTextParams = new LayoutParams(
+				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, (float) 1);
+		rowForSemesterParams.gravity = Gravity.CENTER_HORIZONTAL;
+		rowForSemester.setLayoutParams(rowForSemesterParams);
+
+		// Build the TextView
+		TextView semesterTextView = new TextView(this);
+		semesterTextView.setText(getResources().getString(R.string.semester)
+				+ " " + String.valueOf(semester));
+		semesterTextView.setTextSize(20);
+
+		semesterTextView.setLayoutParams(semesterTextParams);
+		rowForSemester.addView(semesterTextView);
+		return rowForSemester;
+	}
+
+	/**
+	 * Auxillary method used to parse all lectures, looking for relevent ones,
+	 * and pushing them as Views to the Table.
+	 **/
+	@SuppressWarnings("deprecation")
+	private void parseLectures(TableLayout table, ArrayList<Lecture> lectures,
+			int semester, LayoutParams genericRowParams) throws IOException,
+			XmlPullParserException {
+		String day = null;
+
+		// Look through all lectures; if they're enabled, build their View
+		for (Lecture l : lectures) {
+			if (PreferencesManager.isCourseEnabled(this, l)
+					&& l.semester == semester) {
+				Log.v(CLASS_NAME, "Found relevent course...");
+				day = parseDay(table, genericRowParams, day, l);
+
+				// Build Time View
+				TextView timeView = new TextView(this);
+				LayoutParams timeParams = new LayoutParams(10,
+						LayoutParams.WRAP_CONTENT);
+				timeView.setLayoutParams(timeParams);
+				timeView.setText(l.time);
+
+				// Build Lecture name Button
+				Course c = XMLManager.getCourseFromAcronym(this, l.acronym);
+				Button lectureNameBtn = new Button(this);
+				lectureNameBtn.setOnClickListener(this);
+				lectureNameBtn.setTag(R.string.TIME_TAG_ID, l.startTime);
+				lectureNameBtn.setTag(R.string.COURSE_TAG_ID, l.acronym);
+				if (c != null) {
+					lectureNameBtn.setText(c.name);
+				} else {
+					lectureNameBtn.setText(R.string.no_course_name);
+				}
+				LayoutParams buttonParams = new LayoutParams(
+						LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+				buttonParams.weight = 1;
+				lectureNameBtn.setLayoutParams(buttonParams);
+
+				// Build row to contain View data
+				TableRow lectureRow = new TableRow(this);
+				lectureRow.setLayoutParams(genericRowParams);
+				lectureRow.addView(timeView);
+				lectureRow.addView(lectureNameBtn);
+				table.addView(lectureRow);
+				Log.v(CLASS_NAME, "Finished relevent course...");
+			}
+		}
+	}
+
+	/**
+	 * Auxillary method used to parse the day of the week given by a lecture;
+	 * writing a new View to hold that day if it is found.
+	 **/
+	@SuppressWarnings("deprecation")
+	private String parseDay(TableLayout table, LayoutParams genericRowParams,
+			String day, Lecture l) {
+		if (l.day.equals(day) == false || day == null) {
+			Log.v(CLASS_NAME, "Found new day...");
+			day = l.day;
+
+			// Build TextView for the Day
+			TextView dayView = new TextView(this);
+			dayView.setText(day);
+			dayView.setPadding(30, 10, 0, 0);
+			LayoutParams dayParams = new LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.WRAP_CONTENT);
+			dayView.setLayoutParams(dayParams);
+
+			// Build TableRow for the TextView
+			TableRow dayRow = new TableRow(this);
+			dayRow.setLayoutParams(genericRowParams);
+			dayRow.addView(dayView);
+			table.addView(dayRow);
+			Log.v(CLASS_NAME, "Finished new day...");
+		}
+		return day;
+	}
+
+	/**
+	 * Auxillary method used to fill the table contents of the viewgroup.
+	 **/
+	private void fillTable(TableLayout table, LayoutParams genericRowParams) {
+		try {
+			ArrayList<Lecture> lectures = XMLManager.getLectures(this);
+			Log.v(CLASS_NAME, "Lectures gotten. Count: " + lectures.size());
+			int semester = PreferencesManager.getSemester(this);
+
+			// The table contains a semester row, followed by a series of rows
+			// built by parsing the lectures
+			table.addView(buildSemestRow(genericRowParams, semester));
+			parseLectures(table, lectures, semester, genericRowParams);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Auxillary method used to build the table layout which the primary
+	 * ScrollView will contain.
+	 **/
+	@SuppressWarnings("deprecation")
+	private TableLayout buildTable() {
+		// Initialize table
+		TableLayout table = new TableLayout(this);
+		LayoutParams tableParams = new LayoutParams(LayoutParams.FILL_PARENT,
+				LayoutParams.WRAP_CONTENT);
+		table.setLayoutParams(tableParams);
+		table.setPadding(10, 10, 10, 10);
+
+		// Initialize generic row params
+		LayoutParams genericRowParams = new TableRow.LayoutParams(
+				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+
+		fillTable(table, genericRowParams);
+		return table;
+	}
+
+	/**
 	 * Method which builds the viewgroup for the activity. We abstract it so
 	 * that it could be called from different states. For example, the view is
 	 * refreshed when the user swaps semester in the action bar.
 	 */
 	@SuppressWarnings("deprecation")
 	protected void refreshActivityContents() {
-		// Initialize scrollview
+		// Build scrollview, the primary viewgroup
 		ScrollView scrollView = new ScrollView(this);
 		FrameLayout.LayoutParams scrollParams = new ScrollView.LayoutParams(
 				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 		scrollView.setLayoutParams(scrollParams);
-		// Initialize table
-		TableLayout table = new TableLayout(this);
-		LayoutParams tableParams = new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.WRAP_CONTENT);
-		table.setLayoutParams(tableParams);
-		// Initialize generic row params
-		LayoutParams genericRowParams = new TableRow.LayoutParams(
-				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-		Log.v(CLASS_NAME, "onResume occured, next will get lectures...");
-		try {
-			ArrayList<Lecture> lectures = XMLManager.getLectures(this);
-			Log.v(CLASS_NAME, "Lectures gotten. Count: " + lectures.size());
-			String day = null;
-			int semester = PreferencesManager.getSemester(this);
-			TextView semesterTextView = new TextView(this);
-			TableRow rowForSemester = new TableRow(this);
-			rowForSemester.setLayoutParams(genericRowParams);
-			LayoutParams rowForSemesterParams = new LayoutParams(
-					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-			LayoutParams semesterTextParams = new LayoutParams(
-					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT,
-					(float) 1);
-			rowForSemesterParams.gravity = Gravity.CENTER_HORIZONTAL;
-			semesterTextView.setText("Semester " + String.valueOf(semester));
-			semesterTextView.setTextSize(20);
-			rowForSemester.setLayoutParams(rowForSemesterParams);
-			semesterTextView.setLayoutParams(semesterTextParams);
-			rowForSemester.addView(semesterTextView);
-			table.addView(rowForSemester);
-			Log.v(CLASS_NAME, "For lectures:...");
-			for (Lecture l : lectures) {
-				if (PreferencesManager.isCourseEnabled(this, l)
-						&& l.semester == semester) {
-					Log.v(CLASS_NAME, "Found relevent course...");
-					if (l.day.equals(day) == false || day == null) {
-						Log.v(CLASS_NAME, "Found new day...");
-						day = l.day;
-						TableRow dayRow = new TableRow(this);
-						dayRow.setLayoutParams(genericRowParams);
-						TextView dayView = new TextView(this);
-						dayView.setText("     " + day);
-						dayView.setPadding(0, 10, 0, 0);
-						LayoutParams dayParams = new LayoutParams(
-								LayoutParams.FILL_PARENT,
-								LayoutParams.WRAP_CONTENT);
-						dayView.setLayoutParams(dayParams);
-						dayRow.addView(dayView);
-						table.addView(dayRow);
-						Log.v(CLASS_NAME, "Finished new day...");
-					}
-					TextView timeView = new TextView(this);
-					LayoutParams timeParams = new LayoutParams(10,
-							LayoutParams.WRAP_CONTENT);
-					timeView.setLayoutParams(timeParams);
-					Course c = XMLManager.getCourseFromAcronym(this, l.acronym);
-					TableRow lectureRow = new TableRow(this);
-					lectureRow.setLayoutParams(genericRowParams);
-					Button lectureNameBtn = new Button(this);
-					lectureNameBtn.setOnClickListener(this);
-					lectureNameBtn.setTag(R.string.TIME_TAG_ID, l.startTime);
-					lectureNameBtn.setTag(R.string.COURSE_TAG_ID, l.acronym);
-					if (c != null) {
-						lectureNameBtn.setText(c.name);
-					} else {
-						lectureNameBtn.setText(R.string.no_course_name);
-					}
-					LayoutParams buttonParams = new LayoutParams(
-							LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-					buttonParams.weight = 1;
-					timeView.setText(l.time);
-					lectureNameBtn.setLayoutParams(buttonParams);
-					lectureRow.addView(timeView);
-					lectureRow.addView(lectureNameBtn);
-					table.addView(lectureRow);
-					Log.v(CLASS_NAME, "Finished relevent course...");
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-		}
-		scrollView.addView(table);
+		scrollView.addView(buildTable());
 		setContentView(scrollView);
 	}
-
+	
+	/**
+	 * Inherited onCreateOptionsMenu method. Here we have some extra code to
+	 * manage the Search functionality.
+	 **/
 	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main_viewer, menu);
-		// Associated searchable configurations with the searchview
-		Log.v(CLASS_NAME, "Menu Inflated");
-		// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 		SearchManager sMan = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 		Log.v(CLASS_NAME, "Search manager acquired");
 		MenuItem searchItem = menu.findItem(R.id.search);
@@ -165,10 +231,12 @@ public class ActivityMainViewer extends ActionBarActivity implements
 		Log.v(CLASS_NAME, "Searchable Info set");
 		sView.setIconifiedByDefault(true);
 		Log.v(CLASS_NAME, "Iconified by default set");
-		// }
 		return true;
 	}
-
+	
+	/**
+	 * Inherited onOptionsItemSelected method, which calls respective handlers
+	 **/
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -191,7 +259,11 @@ public class ActivityMainViewer extends ActionBarActivity implements
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
+	
+	/**
+	 * swapSemester method, used to invert the semester currently
+	 * displayed/saved by the application.
+	 **/
 	public void swapSemester() {
 		PreferencesManager.swapSemester(this);
 		refreshActivityContents();
@@ -210,6 +282,9 @@ public class ActivityMainViewer extends ActionBarActivity implements
 				getString(R.string.xml_requested_from) + ": "
 						+ PreferencesManager.getXmlUri(this), Toast.LENGTH_LONG)
 				.show();
+		// We use a separate runnable class instead of an anonymous inner class
+		// so that when the async request is completed, it can signal the viewer
+		// to toast.
 		FetchThread ft = new FetchThread(this);
 		ft.start();
 	}
