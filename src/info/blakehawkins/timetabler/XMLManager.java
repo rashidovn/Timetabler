@@ -15,6 +15,9 @@ import android.content.res.AssetManager;
 import android.util.Log;
 import android.widget.Toast;
 
+/**
+ * Facade for managing all interactions with XML data
+ */
 public class XMLManager {
 	private static final String CLASS_NAME = "XMLManager";
 
@@ -22,20 +25,25 @@ public class XMLManager {
 	private static final String TIMETABLE_FILENAME = "timetable.xml";
 	private static final String VENUES_FILENAME = "venues.xml";
 
-	private static final int TOAST_COPIED_DURATION = 4;
-
 	private static ArrayList<Course> coursesCache = null;
 	private static ArrayList<Lecture> lecturesCache = null;
 	private static ArrayList<Venue> venuesCache = null;
 	private static boolean useCoursesCache = false;
 	private static boolean useLecturesCache = false;
 	private static boolean useVenuesCache = false;
-
+	
+	/**
+	 * Method which checks if a file exists in the files directory, useful
+	 * since by default the application only contains files in asset block
+	 */
 	private static boolean fileExistsInFilesDir(String fn, Context cxt) {
 		File f = new File(cxt.getApplicationContext().getFilesDir(), fn);
 		return f.exists();
 	}
-
+	
+	/**
+	 * Generic method for copying a file from an in to an out stream
+	 */
 	private static void copyFile(InputStream in, OutputStream out)
 			throws IOException {
 		byte[] buf = new byte[1024];
@@ -44,13 +52,19 @@ public class XMLManager {
 			out.write(buf, 0, len);
 		}
 	}
-
+	
+	/**
+	 * Helper method for copying a file from an in stream to an out File
+	 */
 	private static void copyFile(InputStream in, File dst) throws IOException {
 		OutputStream out = new FileOutputStream(dst);
 		copyFile(in, out);
 		out.close();
 	}
-
+	
+	/**
+	 * Method for overwriting a file in the files directory
+	 */
 	public static void overwriteXml(Context cxt, InputStream in, String file)
 			throws IOException {
 		useCoursesCache = false;
@@ -60,6 +74,9 @@ public class XMLManager {
 		copyFile(in, new File(filesDir, file));
 	}
 
+	/**
+	 * Method for copying XML from assets (most likely only runs once)
+	 */
 	private static void copyXMLFromAssets(Context cxt) {
 		AssetManager am = cxt.getAssets();
 		File filesDir = cxt.getApplicationContext().getFilesDir();
@@ -80,7 +97,11 @@ public class XMLManager {
 			Log.e(CLASS_NAME, "Unable to open file in assets");
 		}
 	}
-
+	
+	/**
+	 * Method for getting a course given its acronym as a string. Uses a linear
+	 * search which is okay for the reasonable size of courses
+	 */
 	public static Course getCourseFromAcronym(Context cxt, String acnm)
 			throws IOException, XmlPullParserException {
 		ArrayList<Course> courses = getCourses(cxt);
@@ -92,7 +113,11 @@ public class XMLManager {
 		Log.w(CLASS_NAME, "Unable to find course with acronym " + acnm);
 		return null;
 	}
-
+	
+	/**
+	 * Linearly searchs for "any" lecture that contains the course acronym.
+	 * Useful because lectures actually contain broad data as well.
+	 */
 	public static Lecture getLectureFromAcronym(Context cxt, String acnm)
 			throws IOException, XmlPullParserException {
 		ArrayList<Lecture> lecs = getLectures(cxt);
@@ -104,7 +129,10 @@ public class XMLManager {
 		Log.w(CLASS_NAME, "Unable to find lecture with acronym " + acnm);
 		return null;
 	}
-
+	
+	/**
+	 * Gets a specific lecture from a course acronym, time pair (linear search)
+	 */
 	public static Lecture getLectureFromAcronymTimePair(Context cxt,
 			String acnm, Integer sTime) throws IOException,
 			XmlPullParserException {
@@ -121,8 +149,6 @@ public class XMLManager {
 
 	/**
 	 * Used to get a list of courses from courses.xml
-	 * 
-	 * @return ArrayList<String>
 	 **/
 	public static ArrayList<Course> getCourses(Context cxt)
 			throws XmlPullParserException, IOException {
@@ -137,7 +163,10 @@ public class XMLManager {
 		useCoursesCache = true;
 		return results;
 	}
-
+	
+	/**
+	 * Used to get a list of lectures
+	 */
 	public static ArrayList<Lecture> getLectures(Context cxt)
 			throws XmlPullParserException, IOException {
 		if ( useLecturesCache) {
@@ -151,7 +180,10 @@ public class XMLManager {
 		useLecturesCache = true;
 		return results;
 	}
-
+	
+	/**
+	 * Used to get a list of venues
+	 */
 	public static ArrayList<Venue> getVenues(Context cxt)
 			throws XmlPullParserException, IOException {
 		if ( useVenuesCache) {
@@ -165,7 +197,10 @@ public class XMLManager {
 		useVenuesCache=true;
 		return results;
 	}
-
+	
+	/**
+	 * Linear search for a venue given a building name code
+	 */
 	public static Venue getVenueFromBuilding(Context cxt, String name)
 			throws XmlPullParserException, IOException {
 		ArrayList<Venue> venues = getVenues(cxt);
@@ -178,7 +213,11 @@ public class XMLManager {
 		Log.w(CLASS_NAME, "Venue not found with name " + name);
 		return null;
 	}
-
+	
+	/**
+	 * Method for verifying that XML files are in files directory. If not, the
+	 * data is fetched from assets. This part should only occur once
+	 */
 	public static void verifyXMLIntegrity(Context cxt) {
 		boolean c = fileExistsInFilesDir(COURSES_FILENAME, cxt);
 		boolean t = fileExistsInFilesDir(TIMETABLE_FILENAME, cxt);
@@ -188,7 +227,7 @@ public class XMLManager {
 		} else {
 			copyXMLFromAssets(cxt);
 			Toast.makeText(cxt, cxt.getString(R.string.toast_xml_copied_text),
-					TOAST_COPIED_DURATION).show();
+					Toast.LENGTH_LONG).show();
 			Log.v(CLASS_NAME, "XML Data copied from assets");
 		}
 	}

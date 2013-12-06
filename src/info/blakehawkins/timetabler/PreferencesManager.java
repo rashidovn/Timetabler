@@ -8,9 +8,16 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+/**
+ * Static class which delegates preferences access, essentially just a facade
+ * for the local file system.
+ */
 public class PreferencesManager {
 	private static final String CLASS_NAME = "PreferencesManager";
-
+	
+	/**
+	 * Checks today's date and returns the corresponding semester as an integer
+	 */
 	private static int getSemesterFromDate() {
 		Calendar c = Calendar.getInstance();
 		int month = c.get(Calendar.MONTH);
@@ -22,7 +29,11 @@ public class PreferencesManager {
 			return 1;
 		}
 	}
-
+	
+	/**
+	 * Checks a date given in milliseconds and returns the correspoding
+	 * semester as an integer
+	 */
 	private static int getSemesterFromMillis(long m) {
 		Calendar c = Calendar.getInstance();
 		c.setTimeInMillis(m);
@@ -35,18 +46,29 @@ public class PreferencesManager {
 			return 1;
 		}
 	}
-
+	
+	/**
+	 * Slightly comical method name which just returns a date from 1990 in
+	 * milliseconds.
+	 */
 	private static long getLongTimeAgo() {
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.YEAR, 1990);
 		return c.getTimeInMillis();
 	}
-
+	
+	/**
+	 * Method which returns 'now' in milliseconds
+	 */
 	private static long getNow() {
 		Calendar c = Calendar.getInstance();
 		return c.getTimeInMillis();
 	}
-
+	
+	/**
+	 * Public method for getting the logical semester depending on preferences
+	 * and stored values.
+	 */
 	public static int getSemester(Context cxt) {
 		SharedPreferences sp = cxt.getSharedPreferences(
 				cxt.getString(R.string.preference_file_key),
@@ -77,7 +99,10 @@ public class PreferencesManager {
 			return sp.getInt("semester", 1);
 		}
 	}
-
+	
+	/**
+	 * Stores a course as enabled or not to disk.
+	 */
 	public static void setCourseEnabled(Context cxt, Course course,
 			boolean enabled) {
 		SharedPreferences sp = cxt.getSharedPreferences(
@@ -88,6 +113,9 @@ public class PreferencesManager {
 		e.commit();
 	}
 
+	/**
+	 * Checks if a course is enabled or not 
+	 */
 	public static Boolean isCourseEnabled(Context cxt, Lecture lecture) {
 		SharedPreferences sp = cxt.getSharedPreferences(
 				cxt.getString(R.string.preference_file_key),
@@ -102,14 +130,20 @@ public class PreferencesManager {
 		e.commit();
 		return f;
 	}
-
+	
+	/**
+	 * Returns the filter state of the given ID
+	 */
 	public static boolean getFilterState(Context cxt, String id) {
 		SharedPreferences sp = cxt.getSharedPreferences(
 				cxt.getString(R.string.preference_file_key),
 				Context.MODE_PRIVATE);
 		return sp.getBoolean(id, true);
 	}
-
+	
+	/**
+	 * Gets all filter states
+	 */
 	public static ArrayList<Boolean> getFilterStates(Context cxt) {
 		SharedPreferences sp = cxt.getSharedPreferences(
 				cxt.getString(R.string.preference_file_key),
@@ -124,7 +158,10 @@ public class PreferencesManager {
 		filters.add(sp.getBoolean("sem2", true));
 		return filters;
 	}
-
+	
+	/**
+	 * Saves all filter states
+	 */
 	public static void saveFilterStates(Context cxt, boolean y1, boolean y2,
 			boolean y3, boolean y4, boolean y5, boolean sem1, boolean sem2) {
 		SharedPreferences sp = cxt.getSharedPreferences(
@@ -141,22 +178,21 @@ public class PreferencesManager {
 		e.commit();
 	}
 
+	/**
+	 * Gets the stored XML URI which can be set in the settings activity.
+	 */
 	public static String getXmlUri(Context cxt) {
-		// SharedPreferences sp = cxt.getSharedPreferences(
-		// cxt.getString(R.string.preference_file_key),
-		// Context.MODE_PRIVATE);
 		SharedPreferences sp = PreferenceManager
 				.getDefaultSharedPreferences(cxt);
 		String uri = sp.getString(ActivitySettings.KEY_PREF_XML_URI,
 				ActivitySettings.DEFAULT_URI);
-		// String uri = sp.getString("pref_xmlUri",
-		// ActivitySettings.DEFAULT_URI);
-		//String uri = sp.getString(ActivitySettings.KEY_PREF_XML_URI,
-		//		"wrong answer");
 		Log.v(CLASS_NAME, uri);
 		return uri;
 	}
-
+	
+	/**
+	 * Switches the currently enabled semester
+	 */
 	public static void swapSemester(Context cxt) {
 		SharedPreferences sp = cxt.getSharedPreferences(
 				cxt.getString(R.string.preference_file_key),
@@ -170,7 +206,10 @@ public class PreferencesManager {
 		}
 		e.commit();
 	}
-
+	
+	/**
+	 * Checks if a specific course is enabled
+	 */
 	public static Boolean isCourseEnabled(Context cxt, Course course) {
 		SharedPreferences sp = cxt.getSharedPreferences(
 				cxt.getString(R.string.preference_file_key),

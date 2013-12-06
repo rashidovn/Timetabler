@@ -9,7 +9,14 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Xml;
 
+/**
+ * Parser for courses.xml, uses XmlPullParser, and modeled after the parser
+ * shown in the android tutorial. Nothing much to say here.
+ */
 public class CoursesXMLParser {
+	/**
+	 * Method for reading text at the carat.
+	 */
 	private static String readText(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		String result = "";
@@ -19,7 +26,10 @@ public class CoursesXMLParser {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Method for reading url at the carat.
+	 */
 	private static String readUrl(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "url");
@@ -27,7 +37,10 @@ public class CoursesXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "url");
 		return url;
 	}
-
+	
+	/**
+	 * Method for reading name at the carat.
+	 */
 	private static String readName(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "name");
@@ -35,7 +48,10 @@ public class CoursesXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "name");
 		return name;
 	}
-
+	
+	/**
+	 * Method for reading drps at the carat.
+	 */
 	private static String readDrps(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "drps");
@@ -43,7 +59,10 @@ public class CoursesXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "drps");
 		return drps;
 	}
-
+	
+	/**
+	 * Method for reading euclid  at the carat.
+	 */
 	private static String readEuclid(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "euclid");
@@ -52,6 +71,9 @@ public class CoursesXMLParser {
 		return euclid;
 	}
 
+	/**
+	 * Method for reading acronym at the carat.
+	 */
 	private static String readAcronym(XmlPullParser psr)
 			throws XmlPullParserException, IOException {
 		psr.require(XmlPullParser.START_TAG, null, "acronym");
@@ -59,7 +81,10 @@ public class CoursesXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "acronym");
 		return acronym;
 	}
-
+	
+	/**
+	 * Method for reading lecturer at the carat.
+	 */
 	private static String readLecturer(XmlPullParser psr)
 			throws XmlPullParserException, IOException {
 		psr.require(XmlPullParser.START_TAG, null, "lecturer");
@@ -67,7 +92,10 @@ public class CoursesXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "lecturer");
 		return lecturer;
 	}
-
+	
+	/**
+	 * Method for reading ai at the carat.
+	 */
 	private static boolean readAi(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "ai");
@@ -78,7 +106,10 @@ public class CoursesXMLParser {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Method for reading cg at the carat.
+	 */
 	private static boolean readCg(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "cg");
@@ -89,7 +120,10 @@ public class CoursesXMLParser {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Method for reading cs at the carat.
+	 */
 	private static boolean readCs(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "cs");
@@ -100,7 +134,10 @@ public class CoursesXMLParser {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Method for reading se at the carat.
+	 */
 	private static boolean readSe(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "se");
@@ -111,7 +148,10 @@ public class CoursesXMLParser {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Method for reading level at the carat.
+	 */
 	private static int readLevel(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "level");
@@ -119,7 +159,10 @@ public class CoursesXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "level");
 		return Integer.parseInt(level);
 	}
-
+	
+	/**
+	 * Method for reading points at the carat.
+	 */
 	private static int readPoints(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "points");
@@ -127,7 +170,10 @@ public class CoursesXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "points");
 		return Integer.parseInt(points);
 	}
-
+	
+	/**
+	 * Method for reading year at the carat.
+	 */
 	private static int readYear(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "year");
@@ -135,7 +181,10 @@ public class CoursesXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "year");
 		return Integer.parseInt(year);
 	}
-
+	
+	/**
+	 * Method for reading semester at the carat.
+	 */
 	private static int readSemester(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "deliveryperiod");
@@ -148,7 +197,10 @@ public class CoursesXMLParser {
 		}
 		return -1;
 	}
-
+	
+	/**
+	 * Method for reading course at the carat.
+	 */
 	private static Course readCourse(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		psr.require(XmlPullParser.START_TAG, null, "course");
@@ -193,7 +245,10 @@ public class CoursesXMLParser {
 		return new Course(url, name, drps, euclid, acronym, lecturer, ai, cg,
 				cs, se, level, points, year, semester);
 	}
-
+	
+	/**
+	 * Method for skipping the current tag incluing all children
+	 */
 	private static void skip(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		if (psr.getEventType() != XmlPullParser.START_TAG) {
@@ -211,7 +266,10 @@ public class CoursesXMLParser {
 			}
 		}
 	}
-
+	
+	/**
+	 * Method for reading feed at the carat.
+	 */
 	private static ArrayList<Course> readFeed(XmlPullParser psr)
 			throws XmlPullParserException, IOException {
 		ArrayList<Course> courses = new ArrayList<Course>();
@@ -230,6 +288,9 @@ public class CoursesXMLParser {
 		return courses;
 	}
 
+	/**
+	 * Public method for parsing courses.xml - returns an array list
+	 */
 	public static ArrayList<Course> parse(InputStream in)
 			throws XmlPullParserException, IOException {
 		try {

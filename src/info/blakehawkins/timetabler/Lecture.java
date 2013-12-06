@@ -1,10 +1,16 @@
 package info.blakehawkins.timetabler;
 
+/**
+ * Dummy class which contains data found in lectures.xml
+ */
 public class Lecture {
 	public final String day, acronym, room, building, comment, time;
 	public final int semester, startTime;
 	public final boolean year1, year2, year3, year4, year5;
-
+	
+	/**
+	 * Constructor used by XMLManager
+	 */
 	public Lecture(String day, String acronym, String room, String building,
 			String comment, String time, int semester, int startTime,
 			boolean year1, boolean year2, boolean year3, boolean year4,

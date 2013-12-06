@@ -11,9 +11,15 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.Xml;
 
+/**
+ * Parser for timetable.xml, otherwise equivalent to CoursesXMLParser
+ */
 public class TimetableXMLParser {
 	private static final String CLASS_NAME = "TimetableXMLParser";
-
+	
+	/**
+	 * Skips a tag and its children
+	 */
 	private static void skip(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		if (psr.getEventType() != XmlPullParser.START_TAG) {
@@ -31,7 +37,10 @@ public class TimetableXMLParser {
 			}
 		}
 	}
-
+	
+	/**
+	 * Gets both start time as an integer and the lecture period as a string
+	 */
 	private static Pair<String, Integer> parseTimeCode(String startTime) {
 		int s = 0;
 		String q = "";
@@ -65,7 +74,10 @@ public class TimetableXMLParser {
 		}
 		return new Pair<String, Integer>(q, s);
 	}
-
+	
+	/**
+	 * Reads a text node at the carat
+	 */
 	private static String readText(XmlPullParser psr)
 			throws XmlPullParserException, IOException {
 		String result = "";
@@ -75,7 +87,10 @@ public class TimetableXMLParser {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Reads a course at the carat
+	 */
 	private static String readCourse(XmlPullParser psr) throws IOException,
 			XmlPullParserException {
 		psr.require(XmlPullParser.START_TAG, null, "course");
@@ -84,6 +99,9 @@ public class TimetableXMLParser {
 		return name;
 	}
 
+	/**
+	 * Reads a year at the carat
+	 */
 	private static int readYear(XmlPullParser psr) throws IOException,
 			XmlPullParserException {
 		psr.require(XmlPullParser.START_TAG, null, "year");
@@ -91,7 +109,10 @@ public class TimetableXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "year");
 		return Integer.parseInt(year);
 	}
-
+	
+	/**
+	 * Reads a room at the carat
+	 */
 	private static String readRoom(XmlPullParser psr) throws IOException,
 			XmlPullParserException {
 		psr.require(XmlPullParser.START_TAG, null, "room");
@@ -99,7 +120,10 @@ public class TimetableXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "room");
 		return room;
 	}
-
+	
+	/**
+	 * Reads a building at the carat
+	 */
 	private static String readBuilding(XmlPullParser psr) throws IOException,
 			XmlPullParserException {
 		psr.require(XmlPullParser.START_TAG, null, "building");
@@ -107,7 +131,10 @@ public class TimetableXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "building");
 		return building;
 	}
-
+	
+	/**
+	 * Reads a venue at the carat, returning a room, building pair
+	 */
 	private static Pair<String, String> parseVenue(XmlPullParser psr)
 			throws IOException, XmlPullParserException {
 		psr.require(XmlPullParser.START_TAG, null, "venue");
@@ -130,7 +157,10 @@ public class TimetableXMLParser {
 		}
 		return new Pair<String, String>(room, building);
 	}
-
+	
+	/**
+	 * Reads a comment at the carat
+	 */
 	private static String parseComment(XmlPullParser psr) throws IOException,
 			XmlPullParserException {
 		psr.require(XmlPullParser.START_TAG, null, "comment");
@@ -138,7 +168,10 @@ public class TimetableXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, "comment");
 		return comment;
 	}
-
+	
+	/**
+	 * Parses a lecture at the carat
+	 */
 	private static void parseLecture(XmlPullParser psr,
 			ArrayList<Lecture> lectures, int sem, String day, String tString,
 			int time) throws IOException, XmlPullParserException {
@@ -154,7 +187,10 @@ public class TimetableXMLParser {
 				Log.v(CLASS_NAME, "Reading course at " + psr.getLineNumber());
 				acronym = readCourse(psr);
 			} else if (n.equals("years")) {
+				
 				Log.v(CLASS_NAME, "Parsing years at " + psr.getLineNumber());
+				// Parse years; we don't extract a method bfor simplicity since
+				// 5 booleans are written
 				psr.require(XmlPullParser.START_TAG, null, "years");
 				while (psr.next() != XmlPullParser.END_TAG) {
 					if (psr.getEventType() != XmlPullParser.START_TAG) {
@@ -198,13 +234,15 @@ public class TimetableXMLParser {
 				sem, time, year1, year2, year3, year4, year5);
 		lectures.add(l);
 	}
-
+	
+	/**
+	 * Parses time at the carat
+	 */
 	private static void parseTime(XmlPullParser psr,
 			ArrayList<Lecture> lectures, int sem, String day)
 			throws IOException, XmlPullParserException {
 		psr.require(XmlPullParser.START_TAG, null, "time");
 		Log.v(CLASS_NAME, "Parsing time code at " + psr.getLineNumber());
-		// int time = parseTimeCode(psr.getAttributeValue(null, "start"));
 		Pair<String, Integer> tandtstring = parseTimeCode(psr
 				.getAttributeValue(null, "start"));
 		int time = tandtstring.second;
@@ -225,7 +263,10 @@ public class TimetableXMLParser {
 			}
 		}
 	}
-
+	
+	/**
+	 * Reads a day at the carat
+	 */
 	private static void parseDay(XmlPullParser psr,
 			ArrayList<Lecture> lectures, int sem) throws IOException,
 			XmlPullParserException {
@@ -245,7 +286,10 @@ public class TimetableXMLParser {
 			}
 		}
 	}
-
+	
+	/**
+	 * Reads a week at the carat
+	 */
 	private static void parseWeek(XmlPullParser psr,
 			ArrayList<Lecture> lectures, int sem) throws IOException,
 			XmlPullParserException {
@@ -264,7 +308,10 @@ public class TimetableXMLParser {
 			}
 		}
 	}
-
+	
+	/**
+	 * Reads a semester at the carat
+	 */
 	private static void parseSemester(XmlPullParser psr,
 			ArrayList<Lecture> lectures) throws IOException,
 			XmlPullParserException {
@@ -284,7 +331,10 @@ public class TimetableXMLParser {
 			}
 		}
 	}
-
+	
+	/**
+	 * Reads a feed at the carat
+	 */
 	private static ArrayList<Lecture> readFeed(XmlPullParser psr)
 			throws IOException, XmlPullParserException {
 		ArrayList<Lecture> lectures = new ArrayList<Lecture>();
@@ -305,7 +355,10 @@ public class TimetableXMLParser {
 		}
 		return lectures;
 	}
-
+	
+	/**
+	 * Public method for reading a timetable.xml file
+	 */
 	public static ArrayList<Lecture> parse(InputStream in) throws IOException,
 			XmlPullParserException {
 		try {

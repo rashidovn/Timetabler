@@ -10,9 +10,15 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.util.Log;
 import android.util.Xml;
 
+/**
+ * Parser otherwise equivalent to CoursesXMLParser
+ */
 public class VenuesXMLParser {
 	private static final String CLASS_NAME = "VenuesXMLParser";
-
+	
+	/**
+	 * Reads text at the carat
+	 */
 	private static String readText(XmlPullParser psr)
 			throws XmlPullParserException, IOException {
 		String result = "";
@@ -22,7 +28,10 @@ public class VenuesXMLParser {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Reads a text tag of arbitrary tag name at the carat
+	 */
 	private static String readTextTag(XmlPullParser psr, String tagName)
 			throws XmlPullParserException, IOException {
 		psr.require(XmlPullParser.START_TAG, null, tagName);
@@ -30,7 +39,10 @@ public class VenuesXMLParser {
 		psr.require(XmlPullParser.END_TAG, null, tagName);
 		return url;
 	}
-
+	
+	/**
+	 * Reads a building at the carat
+	 */
 	private static Venue readBuilding(XmlPullParser psr)
 			throws XmlPullParserException, IOException {
 		psr.require(XmlPullParser.START_TAG, null, "building");
@@ -52,7 +64,10 @@ public class VenuesXMLParser {
 		}
 		return new Venue(name, description, map);
 	}
-
+	
+	/**
+	 * Skips a tag and its children
+	 */
 	private static void skip(XmlPullParser psr) throws XmlPullParserException,
 			IOException {
 		if (psr.getEventType() != XmlPullParser.START_TAG) {
@@ -70,7 +85,10 @@ public class VenuesXMLParser {
 			}
 		}
 	}
-
+	
+	/**
+	 * Reads a feed at the carat
+	 */
 	private static ArrayList<Venue> readFeed(XmlPullParser psr)
 			throws XmlPullParserException, IOException {
 		ArrayList<Venue> venues = new ArrayList<Venue>();
@@ -88,7 +106,10 @@ public class VenuesXMLParser {
 		}
 		return venues;
 	}
-
+	
+	/**
+	 * Public method for parsing a venues.xml file
+	 */
 	public static ArrayList<Venue> parse(InputStream in)
 			throws XmlPullParserException, IOException {
 		try {

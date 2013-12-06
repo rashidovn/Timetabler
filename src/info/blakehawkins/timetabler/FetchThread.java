@@ -11,17 +11,16 @@ import android.widget.Toast;
 
 /**
  * Here is a special class which extends Thread. It is its own class because we
- * need a custom constructor for it which retains its parent. The parent data
- * is necessary so we can call a Toast message after the fetching is complete.
+ * need a custom constructor for it which retains its parent. The parent data is
+ * necessary so we can call a Toast message after the fetching is complete.
  **/
 public class FetchThread extends Thread implements Runnable {
 	private static final String CLASS_NAME = "FetchThread",
 			COURSES_NAME = "courses.xml", TIMETABLE_NAME = "timetable.xml",
 			VENUES_NAME = "venues.xml";
-	private static final int TOAST_FETCHED_DURATION = 4;
-	
+
 	private ActivityMainViewer parent;
-	
+
 	/**
 	 * Custom constructor which allows us to save parent data
 	 **/
@@ -29,6 +28,10 @@ public class FetchThread extends Thread implements Runnable {
 		this.parent = parent;
 	}
 
+	/**
+	 * Method for requesting data from a URI and then overwriting it on the
+	 * local device.
+	 */
 	private void overwriteFile(String file) {
 		InputStream stream = null;
 		try {
@@ -42,8 +45,7 @@ public class FetchThread extends Thread implements Runnable {
 			con.setDoInput(true);
 			con.connect();
 			stream = con.getInputStream();
-			XMLManager.overwriteXml(parent, stream,
-					file);
+			XMLManager.overwriteXml(parent, stream, file);
 			Log.v(CLASS_NAME, file + " overwritten.");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -60,6 +62,10 @@ public class FetchThread extends Thread implements Runnable {
 		}
 	}
 
+	/**
+	 * Implemented run method, which requests an overwrite of all 3 xml files
+	 * and then sends a toast to the parent UI afterwards.
+	 */
 	@Override
 	public void run() {
 		// Overwrite each file
@@ -70,13 +76,13 @@ public class FetchThread extends Thread implements Runnable {
 		// Log afterwards, and write a toast for the client to see.
 		parent.runOnUiThread(new Runnable() {
 			public void run() {
-				Toast.makeText(parent.getApplicationContext(),
+				Toast.makeText(
+						parent.getApplicationContext(),
 						parent.getString(R.string.toast_xml_fetched_remote_text),
-						TOAST_FETCHED_DURATION).show();
+						Toast.LENGTH_LONG).show();
 				parent.refreshActivityContents();
 			}
 		});
 		Log.v(CLASS_NAME, "Asynchronous XML requests finished.");
-
 	}
 }
