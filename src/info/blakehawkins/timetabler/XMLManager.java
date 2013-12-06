@@ -172,6 +172,7 @@ public class XMLManager {
 		for (Venue v : venues) {
 			if (v.name.equals(name)) {
 				return v;
+				
 			}
 		}
 		Log.w(CLASS_NAME, "Venue not found with name " + name);

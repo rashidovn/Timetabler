@@ -36,15 +36,12 @@ public class ActivityCourseDetails extends ActionBarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Set content view to mostly empty view, in case any issues occur
-		setContentView(R.layout.activity_course_details);
-
 		// Enable 'home up' characteristic
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// Get the course acronym and lecture start time, supplied by the main
 		// viewer as extra data in the intent. Note that the start time data
-		// provided may be 0 (no data)
+		// provided may be 0 (no data).
 		Intent i = getIntent();
 		String acnm = i.getStringExtra(ActivityMainViewer.COURSE_INTENT_KEY);
 		Integer sTime = i.getIntExtra(ActivityMainViewer.TIME_INTENT_KEY, 0);
@@ -53,6 +50,9 @@ public class ActivityCourseDetails extends ActionBarActivity implements
 
 		// Build new content view from intent's data:
 		try {
+			// If the XML data is malformed, there may be a lecture which has no
+			// course associated with it, in which case c will be null (we check
+			// for this later, just in case :) )
 			Course c = XMLManager.getCourseFromAcronym(this, acnm);
 
 			// If the start time provided is "real" information, we also get
@@ -91,12 +91,14 @@ public class ActivityCourseDetails extends ActionBarActivity implements
 	}
 
 	/**
-	 * Auxillary method for building a simple Buton (View)
+	 * Auxillary method for building a simple Buton (View) The click listener is
+	 * also applied by default for all buttons (!)
 	 **/
 	private View buildSimpleButton(String text, Object tag) {
 		Button b = new Button(this);
 		b.setText(text);
 		b.setTag(tag);
+		b.setOnClickListener(this);
 		return b;
 	}
 
@@ -151,11 +153,11 @@ public class ActivityCourseDetails extends ActionBarActivity implements
 
 	/**
 	 * Builds the linear layout which contains all the contents of the Course
-	 * Details activity. The LienarLayout is returned to the parent ScrollView.
+	 * Details activity. The LinearLayout is returned to the parent ScrollView.
 	 */
 	@SuppressWarnings("deprecation")
 	private View buildLinearLayout(Course c, Lecture l) {
-		// Get Resources object to reduce repeated calls
+		// Get Resources object to a handle to improve readability
 		Resources res = getResources();
 
 		// Initialize layout
@@ -165,8 +167,14 @@ public class ActivityCourseDetails extends ActionBarActivity implements
 		layout.setLayoutParams(standardParams);
 		layout.setOrientation(LinearLayout.VERTICAL);
 
-		// Add coursename
-		layout.addView(buildSimpleTextView(c.name));
+		// Add coursename - we check if c is null or not in case of an unusual
+		// XML malformation
+		if (c != null) {
+			layout.addView(buildSimpleTextView(c.name));
+		} else {
+			layout.addView(buildSimpleTextView(res
+					.getString(R.string.no_course_name)));
+		}
 		try {
 			// Fetch venue data if a lecture was given. Add auxillary views only
 			// if lecture/venue data is known
@@ -185,28 +193,30 @@ public class ActivityCourseDetails extends ActionBarActivity implements
 				layout.addView(buildApplicableYearsTextView(l));
 			}
 
-			// Add EUCLID view
-			layout.addView(buildSimpleTextView(res.getString(R.string.euclid)
-					+ ": " + c.euclid));
+			if (c != null) {
+				// Add EUCLID view
+				layout.addView(buildSimpleTextView(res
+						.getString(R.string.euclid) + ": " + c.euclid));
 
-			// Add Applicable Department View
-			layout.addView(buildApplicableDepartmentTextView(c));
+				// Add Applicable Department View
+				layout.addView(buildApplicableDepartmentTextView(c));
 
-			// Add Course Level view
-			layout.addView(buildSimpleTextView(res
-					.getString(R.string.course_level) + ": " + c.level));
+				// Add Course Level view
+				layout.addView(buildSimpleTextView(res
+						.getString(R.string.course_level) + ": " + c.level));
 
-			// Add Points view
-			layout.addView(buildSimpleTextView(res.getString(R.string.pts)
-					+ ": " + c.points));
+				// Add Points view
+				layout.addView(buildSimpleTextView(res.getString(R.string.pts)
+						+ ": " + c.points));
 
-			// Add Lecturer view
-			layout.addView(buildSimpleTextView(res.getString(R.string.lec)
-					+ ": " + c.lecturer));
+				// Add Lecturer view
+				layout.addView(buildSimpleTextView(res.getString(R.string.lec)
+						+ ": " + c.lecturer));
 
-			// Course Webpage Button
-			layout.addView(buildSimpleButton(
-					res.getString(R.string.course_webpage), c.url));
+				// Course Webpage Button
+				layout.addView(buildSimpleButton(
+						res.getString(R.string.course_webpage), c.url));
+			}
 
 			// We check for venue again down here to keep buttons together
 			if (ven != null) {
@@ -216,16 +226,20 @@ public class ActivityCourseDetails extends ActionBarActivity implements
 			}
 
 			// Add DRPS link button
-			layout.addView(buildSimpleButton(res.getString(R.string.drps),
-					c.drps));
+			if (c != null) {
+				layout.addView(buildSimpleButton(res.getString(R.string.drps),
+						c.drps));
+			}
 
 			// Add Checkbox to include in Timetable
-			CheckBox check = new CheckBox(this);
-			check.setText(res.getString(R.string.show_in_timetabler));
-			check.setChecked(PreferencesManager.isCourseEnabled(this, c));
-			check.setOnClickListener(this);
-			check.setTag(c.acronym);
-			layout.addView(check);
+			if (c != null) {
+				CheckBox check = new CheckBox(this);
+				check.setText(res.getString(R.string.show_in_timetabler));
+				check.setChecked(PreferencesManager.isCourseEnabled(this, c));
+				check.setOnClickListener(this);
+				check.setTag(c.acronym);
+				layout.addView(check);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (XmlPullParserException e) {

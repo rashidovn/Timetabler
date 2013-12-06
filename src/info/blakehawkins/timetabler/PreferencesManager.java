@@ -5,8 +5,12 @@ import java.util.Calendar;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class PreferencesManager {
+	private static final String CLASS_NAME = "PreferencesManager";
+
 	private static int getSemesterFromDate() {
 		Calendar c = Calendar.getInstance();
 		int month = c.get(Calendar.MONTH);
@@ -66,7 +70,7 @@ public class PreferencesManager {
 				e.putLong("lastAccessed", getNow());
 				e.commit();
 				return now;
-			}else{
+			} else {
 				return sp.getInt("semester", 1);
 			}
 		} else {
@@ -138,10 +142,19 @@ public class PreferencesManager {
 	}
 
 	public static String getXmlUri(Context cxt) {
-		SharedPreferences sp = cxt.getSharedPreferences(
-				cxt.getString(R.string.preference_file_key),
-				Context.MODE_PRIVATE);
-		return sp.getString("pref_xmlUri", ActivitySettings.DEFAULT_URI);
+		// SharedPreferences sp = cxt.getSharedPreferences(
+		// cxt.getString(R.string.preference_file_key),
+		// Context.MODE_PRIVATE);
+		SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(cxt);
+		String uri = sp.getString(ActivitySettings.KEY_PREF_XML_URI,
+				ActivitySettings.DEFAULT_URI);
+		// String uri = sp.getString("pref_xmlUri",
+		// ActivitySettings.DEFAULT_URI);
+		//String uri = sp.getString(ActivitySettings.KEY_PREF_XML_URI,
+		//		"wrong answer");
+		Log.v(CLASS_NAME, uri);
+		return uri;
 	}
 
 	public static void swapSemester(Context cxt) {

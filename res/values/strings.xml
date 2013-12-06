@@ -12,6 +12,7 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_search_results">Search Results</string>
     <string name="toast_xml_copied_text">XML Data copied from static assets successfully.</string>
+    <string name="toast_xml_fetched_remote_text">XML Data fetched from remote server successfully.</string>
     <string name="preference_file_key">info.blakehawkins.timetabler.preferencesKey</string>
     <string name="action_filter_courses">Filter Courses</string>
     <string name="display_years">Display Years</string>
@@ -23,6 +24,8 @@
     <string name="display_semesters">Display Semesters</string>
     <string name="semester1">Semester 1</string>
     <string name="semester2">Semester 2</string>
+    <string name="pref_xmlUri">PREF_XML_URI</string>
+    <string name="pref_autoSemester">PREF_AUTO_SEMESTER</string>
     <string name="pref_xmlUri_title">XML Fetch URI</string>
     <string name="pref_xmlUri_summary">Location of XML files to fetch when refreshing XML data</string>
     <string name="pref_xmlUri_default">http://www.inf.ed.ac.uk/teaching/courses/selp/xml/</string>
@@ -55,6 +58,7 @@
     <string name="yr4">Year 4</string>
     <string name="yr5">Year 5</string>
     <string name="applicable_years">Applicable Years</string>
+    <string name="no_course_name">No Course Associated with Lecture!</string>
+    <string name="xml_requested_from">XML requested from</string>
     <string name="TIME_TAG_ID">1</string>
-    <string name="COURSE_TAG_ID">2</string>
-</resources>
+    <string name="COURSE_TAG_ID">2</string></resources>

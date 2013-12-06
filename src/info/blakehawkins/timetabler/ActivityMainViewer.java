@@ -1,10 +1,6 @@
 package info.blakehawkins.timetabler;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -14,7 +10,6 @@ import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
@@ -28,17 +23,29 @@ import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 
+/**
+ * Main Viewer activity, which is the launcher activity. Displays lecture
+ * details about selected courses for the active semester. Lectures can be
+ * selected to display additional details.
+ **/
 public class ActivityMainViewer extends ActionBarActivity implements
 		Button.OnClickListener {
 	private static final String CLASS_NAME = "ActivityMainViewer";
+
 	public static final String TIME_INTENT_KEY = "info.blakehawkins.timetabler.time",
 			COURSE_INTENT_KEY = "info.blakehawkins.timetabler.course";
 
+	/**
+	 * Method which builds the viewgroup for the activity. We abstract it so
+	 * that it could be called from different states. For example, the view is
+	 * refreshed when the user swaps semester in the action bar.
+	 */
 	@SuppressWarnings("deprecation")
-	private void refreshActivityContents() {
+	protected void refreshActivityContents() {
 		// Initialize scrollview
 		ScrollView scrollView = new ScrollView(this);
 		FrameLayout.LayoutParams scrollParams = new ScrollView.LayoutParams(
@@ -105,7 +112,11 @@ public class ActivityMainViewer extends ActionBarActivity implements
 					lectureNameBtn.setOnClickListener(this);
 					lectureNameBtn.setTag(R.string.TIME_TAG_ID, l.startTime);
 					lectureNameBtn.setTag(R.string.COURSE_TAG_ID, l.acronym);
-					lectureNameBtn.setText(c.name);
+					if (c != null) {
+						lectureNameBtn.setText(c.name);
+					} else {
+						lectureNameBtn.setText(R.string.no_course_name);
+					}
 					LayoutParams buttonParams = new LayoutParams(
 							LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 					buttonParams.weight = 1;
@@ -126,14 +137,6 @@ public class ActivityMainViewer extends ActionBarActivity implements
 		setContentView(scrollView);
 	}
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.activity_main_viewer);
-		Log.v(CLASS_NAME, "Activity Created");
-		refreshActivityContents();
-	}
-
 	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,26 +145,27 @@ public class ActivityMainViewer extends ActionBarActivity implements
 		getMenuInflater().inflate(R.menu.activity_main_viewer, menu);
 		// Associated searchable configurations with the searchview
 		Log.v(CLASS_NAME, "Menu Inflated");
-		//if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			SearchManager sMan = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-			Log.v(CLASS_NAME, "Search manager acquired");
-			MenuItem searchItem = menu.findItem(R.id.search);
-			if (searchItem == null) {
-				Log.v(CLASS_NAME, "searchItem null");
-			}
-			Log.v(CLASS_NAME,searchItem.toString());
-			SearchView sView = (SearchView) MenuItemCompat.getActionView(searchItem);
-			if (sView == null) {
-				Log.v(CLASS_NAME, "sView Null!");
-			}
-			Log.v(CLASS_NAME, "Search view acquired");
-			SearchableInfo info = sMan.getSearchableInfo(getComponentName());
-			Log.v(CLASS_NAME, "Search info acquired: " + info.toString());
-			sView.setSearchableInfo(info);
-			Log.v(CLASS_NAME, "Searchable Info set");
-			sView.setIconifiedByDefault(true);
-			Log.v(CLASS_NAME, "Iconified by default set");
-		//}
+		// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+		SearchManager sMan = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		Log.v(CLASS_NAME, "Search manager acquired");
+		MenuItem searchItem = menu.findItem(R.id.search);
+		if (searchItem == null) {
+			Log.v(CLASS_NAME, "searchItem null");
+		}
+		Log.v(CLASS_NAME, searchItem.toString());
+		SearchView sView = (SearchView) MenuItemCompat
+				.getActionView(searchItem);
+		if (sView == null) {
+			Log.v(CLASS_NAME, "sView Null!");
+		}
+		Log.v(CLASS_NAME, "Search view acquired");
+		SearchableInfo info = sMan.getSearchableInfo(getComponentName());
+		Log.v(CLASS_NAME, "Search info acquired: " + info.toString());
+		sView.setSearchableInfo(info);
+		Log.v(CLASS_NAME, "Searchable Info set");
+		sView.setIconifiedByDefault(true);
+		Log.v(CLASS_NAME, "Iconified by default set");
+		// }
 		return true;
 	}
 
@@ -193,76 +197,63 @@ public class ActivityMainViewer extends ActionBarActivity implements
 		refreshActivityContents();
 	}
 
-	public void refreshXML() {
-		Thread thread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				String[] files = new String[3];
-				files[0] = "courses.xml";
-				files[1] = "timetable.xml";
-				files[2] = "venues.xml";
-				for (String file : files) {
-					InputStream stream = null;
-					try {
-						String address = PreferencesManager
-								.getXmlUri(getApplicationContext()) + file;
-						URL url = new URL(address);
-						HttpURLConnection con = (HttpURLConnection) url
-								.openConnection();
-						con.setReadTimeout(10000);
-						con.setConnectTimeout(15000);
-						con.setRequestMethod("GET");
-						con.setDoInput(true);
-						con.connect();
-						stream = con.getInputStream();
-						XMLManager.overwriteXml(getApplicationContext(),
-								stream, file);
-						Log.v(CLASS_NAME, file + " overwritten.");
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					} finally {
-						if (stream != null) {
-							try {
-								stream.close();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						}
-					}
-				}
-				Log.v(CLASS_NAME, "Asynchronous XML requests finished.");
-			}
-		});
-		thread.start();
+	/**
+	 * Auxillary method used to fetch and refresh the client's XML data from the
+	 * URI given in settings. By default it will fetch from the static URI
+	 * provided in the SELP course descriptor.
+	 **/
+	private void refreshXML() {
+		// Build a new thread to handle the request, since fetching files from
+		// a remove server shouldn't block screen drawing.
+		Toast.makeText(
+				this,
+				getString(R.string.xml_requested_from) + ": "
+						+ PreferencesManager.getXmlUri(this), Toast.LENGTH_LONG)
+				.show();
+		FetchThread ft = new FetchThread(this);
+		ft.start();
 	}
 
-	public void settings() {
+	/**
+	 * Auxillary method used to start ActivitySettings
+	 **/
+	private void settings() {
 		Intent intent = new Intent(this, ActivitySettings.class);
 		startActivity(intent);
 	}
 
-	public void selectCourses() {
+	/**
+	 * Auxillary method used to start ActivitySelectCourses
+	 **/
+	private void selectCourses() {
 		Intent intent = new Intent(this, ActivitySelectCourses.class);
 		startActivity(intent);
 	}
 
+	/**
+	 * Inherited onStart method, which occurs after the activity is created, but
+	 * also after the activity is stopped (onStop) and restarted. It is
+	 * important to call refreshActivityContents() here rather than onCreate()
+	 * so that when MainViewer is *returned to* from another activity, it will
+	 * refresh its contents in case anything has been changed.
+	 **/
 	public void onStart() {
 		super.onStart();
-		Log.v(CLASS_NAME, "onStart() occured.");
 		XMLManager.verifyXMLIntegrity(this);
 		refreshActivityContents();
 	}
 
+	/**
+	 * Implemented onClick handler, which registers the clicking of a link in
+	 * the main viewer, and opens the course/lecture details in the
+	 * CourseDetails activity.
+	 */
 	@Override
 	public void onClick(View arg0) {
 		Intent intent = new Intent(this, ActivityCourseDetails.class);
-		Log.v(CLASS_NAME,
-				"Sending "
-						+ String.valueOf((Integer) arg0
-								.getTag(R.string.TIME_TAG_ID)) + " "
-						+ (String) arg0.getTag(R.string.COURSE_TAG_ID));
+
+		// Attach course acronym and lecture start time to the intent, so
+		// CourseDetails activity can fetch the proper lecture
 		intent.putExtra(COURSE_INTENT_KEY,
 				(String) arg0.getTag(R.string.COURSE_TAG_ID));
 		intent.putExtra(TIME_INTENT_KEY,
